@@ -1,5 +1,3 @@
-{ username, hostname, ... }:
-
 { config, pkgs, ... }:
 
 {
@@ -46,11 +44,11 @@
     };
   };
 
-  home.username = username;
-  home.homeDirectory = "/home/${username}";
+  home.username = "cedar";
+  home.homeDirectory = "/home/cedar";
 
   home.packages = with pkgs; [
-    vscode
+    (import ./vscode.nix { inherit pkgs; })
     firefox
     discord
     curl
