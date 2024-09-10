@@ -47,7 +47,7 @@
   };
 
   home.username = username;
-  home.homeDirectory = "/home/${username}"
+  home.homeDirectory = "/home/${username}";
 
   home.packages = with pkgs; [
     vscode
