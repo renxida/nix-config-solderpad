@@ -111,7 +111,7 @@
   
   fonts.packages = with pkgs; [
     font-awesome
-  ]
+  ];
 
   services.libinput = {
     enable = true;
