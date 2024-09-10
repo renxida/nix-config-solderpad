@@ -1,4 +1,6 @@
-{ config, pkgs, lib, hostname ? "solderpad", username ? "cedar", ... }:
+{hostname ? "solderpad", username ? "cedar"}:
+
+{ config, lib, pkgs, ... }:
 
 {
   imports = [
