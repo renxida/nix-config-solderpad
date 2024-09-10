@@ -63,7 +63,7 @@
       # Define hosts
       solderpad = lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = { inherit inputs outputs; };
+        specialArgs = { inherit inputs outputs lib; };
         modules = commonModules ++ [
           (import ./hosts/solderpad/configuration.nix { hostname = "solderpad"; username = "cedar"; })
 
