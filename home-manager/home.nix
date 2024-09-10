@@ -53,7 +53,6 @@
   # Add stuff for your user as you see fit:
   programs.neovim.enable = true;
   home.packages = with pkgs; [
-    neovim
     vscode
     firefox
     discord
@@ -79,8 +78,8 @@
   programs.home-manager.enable = true;
   programs.git = {
     enable = true;
-    userName = "Xida Ren";
-    user.Email = "cedar.ren@gmail.com";
+    userName = "Cedar";
+    userEmail = "cedar.ren@gmail.com";
   };
 
   programs.firefox.enable = true;
