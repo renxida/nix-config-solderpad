@@ -32,14 +32,7 @@
     # This is a function that generates an attribute by calling a function you
     # pass to it, with each system as an argument
     forAllSystems = nixpkgs.lib.genAttrs systems;
-  in {
-    overlays = import ./overlays { inherit inputs; };
-    packages = forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
-
-    formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
-      
-    nixosConfigurations = {
-      commonModules = [
+    commonModules = [
         ./nixos/configuration.nix
         home-manager.nixosModules.home-manager
         {
@@ -59,6 +52,13 @@
           };
         }
       ];
+  in {
+    overlays = import ./overlays { inherit inputs; };
+    packages = forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
+
+    formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
+      
+    nixosConfigurations = {
 
       # Define hosts
       solderpad = lib.nixosSystem {
