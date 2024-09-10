@@ -68,25 +68,81 @@
     nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
   };
 
-  # FIXME: Add the rest of your current configuration
+  environment = {
+    systemPackages = with pkgs; [
+      vim
+      wget
+      git
+      xclip
+      clang
+      llvmPackages.libcxx
+      pamixer
+      wireplumber
+      brightnessctl
+      unzip
+    ];
+    shellAliases = {
+      pbcopy = "xclip -selection clipboard";
+      pbpaste = "xclip -selection clipboard -o";
+    };
+    variables = {
+      CC = "clang";
+      CXX = "clang++";
+    };
+  };
 
-  # TODO: Set your hostname
-  networking.hostName = "your-hostname";
+  hardware = {
+    bluetooth.enable = true;
+    bluetooth.powerOnBoot = true;
+  };
+  
 
-  # TODO: Configure your system-wide user settings (groups, etc), add more users as needed.
+  networking.hostName = "solderpad";
+  networking.networkmanager.enable = true;
+  
+  services.xserver.enable = true;
+  services.xserver.displayManager = {
+    lightdm.enable = true;
+    defaultSession = "none+i3";
+  };
+
+  services.xserver.windowManager.i3.enable = true;
+  services.xserver.desktopManger.xfce.enable = true;
+  
+  fonts.packages = with pkgs; [
+    font-awesome
+  ]
+
+  services.libinput = {
+    enable = true;
+    touchpad = {
+      naturalScrolling = true;
+    };
+  };
+
+  services.printing.enable = true;
+  
+  # Pipewire
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+    jack.enable = true;
+  };
+
+
   users.users = {
-    # FIXME: Replace with your username
-    your-username = {
-      # TODO: You can set an initial password for your user.
+    cedar = {
       # If you do, you can skip setting a root password by passing '--no-root-passwd' to nixos-install.
       # Be sure to change it (using passwd) after rebooting!
-      initialPassword = "correcthorsebatterystaple";
+      initialPassword = "$olderpad";
       isNormalUser = true;
       openssh.authorizedKeys.keys = [
         # TODO: Add your SSH public key(s) here, if you plan on using SSH to connect
       ];
-      # TODO: Be sure to add any other groups you need (such as networkmanager, audio, docker, etc)
-      extraGroups = ["wheel"];
+      extraGroups = [ "networkmanager" "wheel" "audio" "video" "docker"];
     };
   };
 
