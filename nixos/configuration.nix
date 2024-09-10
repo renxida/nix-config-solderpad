@@ -113,7 +113,7 @@
     font-awesome
   ];
 
-  services.libinput = {
+  services.xserver.libinput = {
     enable = true;
     touchpad = {
       naturalScrolling = true;
