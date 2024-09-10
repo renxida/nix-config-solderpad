@@ -107,7 +107,7 @@
   };
 
   services.xserver.windowManager.i3.enable = true;
-  services.xserver.desktopManger.xfce.enable = true;
+  #services.xserver.desktopManger.xfce.enable = true;
   
   fonts.packages = with pkgs; [
     font-awesome
