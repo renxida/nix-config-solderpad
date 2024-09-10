@@ -65,9 +65,8 @@
         system = "x86_64-linux";
         specialArgs = { inherit inputs outputs; };
         modules = commonModules ++ [
-          ./hosts/solderpad/configuration.nix
+          (import ./hosts/solderpad/configuration.nix)
           {
-            networking.hostName = "solderpad";
             home-manager.users.cedar = import ./home-manager/home.nix;
           }
         ];
