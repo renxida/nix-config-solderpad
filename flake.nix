@@ -77,11 +77,11 @@
       # examplehost = lib.nixosSystem { ... };
     };
     homeConfigurations = {
-      "cedar@solderpad" = home-manager.lib.homeManagerConfiguration {
+      solderpad = home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.x86_64-linux; # adjust if needed
         extraSpecialArgs = { inherit inputs outputs; };
         modules = [
-          ./home-manager/home.nix
+          (import ./home-manager/home.nix { hostname = "solderpad"; username = "cedar"; })
         ];
       };
     };
