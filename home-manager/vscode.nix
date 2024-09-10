@@ -3,7 +3,7 @@
 pkgs.vscode-with-extensions.override {
   vscodeExtensions = with pkgs.vscode-extensions; [
     ms-python.python
-    ms-vscode.cpptools
+    #ms-vscode.cpptools
     rust-lang.rust-analyzer
     github.copilot
   ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
