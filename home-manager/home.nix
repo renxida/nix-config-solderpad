@@ -1,5 +1,8 @@
 { config, pkgs, ... }:
 
+let
+  chatsh = (builtins.getFlake "github:renxida/chatsh/57f077e6196eeff45896fb59e9d28a01c8af7667").packages.${pkgs.system}.default;
+in
 {
   nixpkgs = {
     config = {
@@ -67,6 +70,7 @@
     i3
     (nerdfonts.override { fonts = [ "FiraCode" ]; })
     i3status-rust
+    chatsh
   ];
 
   xsession.windowManager.i3 = {
