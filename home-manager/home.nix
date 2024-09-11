@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 let
-  chatsh = (builtins.getFlake "github:renxida/chatsh/57f077e6196eeff45896fb59e9d28a01c8af7667").packages.${pkgs.system}.default;
+  chatsh = (builtins.getFlake "github:renxida/chatsh/aacf2e5008e66e4dddd817459888266a50819a96").packages.${pkgs.system}.default;
 in
 {
   nixpkgs = {
