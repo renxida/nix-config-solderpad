@@ -21,6 +21,21 @@
         config.allowUnfree = true;
       };
     in {
+      homeManagerConfigurations = {
+        cedar = home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          modules = [
+            ./home-manager/home.nix
+            {
+              home ={
+                username = "cedar";
+                homeDirectory = "/home/cedar";
+              };
+            }
+          ];
+          extraSpecialArgs = { inherit chatsh; };
+        };
+      };
       nixosConfigurations = {
         solderpad = nixpkgs.lib.nixosSystem {
           inherit system;

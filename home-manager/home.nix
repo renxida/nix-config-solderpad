@@ -44,9 +44,6 @@
     };
   };
 
-  home.username = "cedar";
-  home.homeDirectory = "/home/cedar";
-
   home.packages = with pkgs; [
     chatsh.packages.${pkgs.system}.default
     (import ./vscode.nix { inherit pkgs; })

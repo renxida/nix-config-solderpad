@@ -42,12 +42,12 @@
   networking.networkmanager.enable = true;
 
   services = {
+    displayManager = {
+      lightdm.enable = true;
+      defaultSession = "none+i3";
+    };
     xserver = {
       enable = true;
-      displayManager = {
-        lightdm.enable = true;
-        defaultSession = "none+i3";
-      };
       windowManager.i3.enable = true;
     };
     libinput = {
