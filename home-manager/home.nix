@@ -1,59 +1,55 @@
-# This is your home-manager configuration file
-# Use this to configure your home environment (it replaces ~/.config/nixpkgs/home.nix)
+{ config, pkgs, chatsh, ... }:
+
 {
-  inputs,
-  outputs,
-  lib,
-  config,
-  pkgs,
-  ...
-}: {
-  # You can import other home-manager modules here
-  imports = [
-    # If you want to use modules your own flake exports (from modules/home-manager):
-    # outputs.homeManagerModules.example
-
-    # Or modules exported from other flakes (such as nix-colors):
-    # inputs.nix-colors.homeManagerModules.default
-
-    # You can also split up your configuration and import pieces of it here:
-    # ./nvim.nix
-  ];
-
   nixpkgs = {
-    # You can add overlays here
-    overlays = [
-      # Add overlays your own flake exports (from overlays and pkgs dir):
-      outputs.overlays.additions
-      outputs.overlays.modifications
-      outputs.overlays.unstable-packages
-
-      # You can also add overlays exported from other flakes:
-      # neovim-nightly-overlay.overlays.default
-
-      # Or define it inline, for example:
-      # (final: prev: {
-      #   hi = final.hello.overrideAttrs (oldAttrs: {
-      #     patches = [ ./change-hello-to-hi.patch ];
-      #   });
-      # })
-    ];
-    # Configure your nixpkgs instance
     config = {
-      # Disable if you don't want unfree packages
       allowUnfree = true;
     };
   };
 
-  home = {
-    username = "cedar";
-    homeDirectory = "/home/cedar";
+  programs = {
+    home-manager.enable = true;
+    git = {
+      enable = true;
+      userName = "Cedar";
+      userEmail = "cedar.ren@gmail.com";
+    };
+    neovim.enable = true;
+    firefox.enable = true;
+    rofi = {
+      enable = true;
+      theme = "Monokai";
+      extraConfig = {
+        modi = "run,drun,window";
+        icon-theme = "Papirus";
+        show-icons = true;
+        terminal = "kitty";
+        drun-display-format = "{icon} {name}";
+        location = 0;
+        disable-history = false;
+        hide-scrollbar = true;
+        display-drun = "   Apps ";
+        display-run = "   Run ";
+        display-window = " 﩯  Window";
+        display-Network = " 󰤨  Network";
+        sidebar-mode = true;
+      };
+    };
+    kitty = {
+      enable = true;
+      font = {
+        name = "FiraCode Nerd Font";
+        size = 12;
+      };
+    };
   };
 
-  # Add stuff for your user as you see fit:
-  programs.neovim.enable = true;
+  home.username = "cedar";
+  home.homeDirectory = "/home/cedar";
+
   home.packages = with pkgs; [
-    vscode
+    chatsh.packages.${pkgs.system}.default
+    (import ./vscode.nix { inherit pkgs; })
     firefox
     discord
     curl
@@ -74,39 +70,6 @@
     i3status-rust
   ];
 
-  # Enable home-manager and git
-  programs.home-manager.enable = true;
-  programs.git = {
-    enable = true;
-    userName = "Cedar";
-    userEmail = "cedar.ren@gmail.com";
-  };
-
-  programs.firefox.enable = true;
-  programs.rofi = {
-    enable = true;
-    theme = "Monokai";
-    extraConfig = {
-      modi = "run,drun,window";
-      icon-theme = "Papirus";
-      show-icons = true;
-      terminal = "kitty";
-      drun-display-format = "{icon} {name}";
-      location = 0;
-      disable-history = false;
-      hide-scrollbar = true;
-      display-drun = "   Apps ";
-      display-run = "   Run ";
-      display-window = " 﩯  Window";
-      display-Network = " 󰤨  Network";
-      sidebar-mode = true;
-    };
-  };
-  programs.kitty = {
-    enable = true;
-    font.name = "FiraCode Nerd Font";
-    font.size = 12;
-  };
   xsession.windowManager.i3 = {
     enable = true;
     extraConfig = builtins.readFile ./i3-config;
@@ -160,10 +123,10 @@
             format_alt = " $icon {$ip|Disconnected} ";
             interval = 5;
           }
-	  {
+          {
             block = "sound";
-	    step_width = 5;
-	  }
+            step_width = 5;
+          }
           {
             block = "time";
             interval = 60;
@@ -174,16 +137,10 @@
     };
   };
 
-  # Set Clang as the default C compiler
   home.sessionVariables = {
     CC = "clang";
     CXX = "clang++";
   };
 
-
-  # Nicely reload system units when changing configs
-  systemd.user.startServices = "sd-switch";
-
-  # https://nixos.wiki/wiki/FAQ/When_do_I_update_stateVersion
   home.stateVersion = "24.05";
 }
