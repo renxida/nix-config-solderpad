@@ -21,7 +21,20 @@
         config.allowUnfree = true;
       };
     in {
-      homeManagerConfigurations = {
+      homeConfigurations = {
+        xidaren2 = home-manager.lib.homeManagerConfiguration {
+          inherit pkgs;
+          modules = [
+            ./home-manager/home.nix
+            {
+              home ={
+                username = "xidaren2";
+                homeDirectory = "/home/xidaren2";
+              };
+            }
+          ];
+          extraSpecialArgs = { inherit chatsh; };
+        };
         cedar = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
           modules = [
