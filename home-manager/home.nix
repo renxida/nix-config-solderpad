@@ -125,9 +125,11 @@
             step_width = 5;
           }
           {
+            block = "battery";
+	  }
+          {
             block = "time";
             interval = 60;
-            format = " $timestamp.datetime(f:'%a %m-%d %R') ";
           }
         ];
       };
