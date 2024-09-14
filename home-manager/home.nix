@@ -124,9 +124,11 @@
             block = "sound";
             step_width = 5;
           }
-          {
+	  {
             block = "battery";
-	  }
+            format = " $icon $percentage {$time_remaining |} {$power |}W ";
+            charging_format = " $icon $percentage {$time_remaining |} {$power |}W Charging ";
+          }
           {
             block = "time";
             interval = 60;
