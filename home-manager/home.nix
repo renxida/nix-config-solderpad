@@ -126,7 +126,7 @@
           }
 	  {
             block = "battery";
-            format = " $icon $percentage {$time_remaining |} {$power |}W ";
+            format = " $icon $percentage {$time_remaining |} {$power |} ";
             charging_format = " $icon $percentage {$time_remaining |} {$power |}W Charging ";
           }
           {
