@@ -1,30 +1,46 @@
 { config, pkgs, ... }:
 
+let
+  rustToolchain = pkgs.rust-bin.stable.latest.default.override {
+    extensions = [ "rust-src" "rust-analyzer" ];
+  };
+in
 {
   programs.neovim = {
     enable = true;
     viAlias = true;
     vimAlias = true;
-
-    # Use the configuration from the nvim directory
     extraLuaConfig = ''
       require('init')
     '';
-
-    # Install lazy.nvim and Treesitter
     plugins = with pkgs.vimPlugins; [
       lazy-nvim
-      (nvim-treesitter.withPlugins (plugins: pkgs.tree-sitter.allGrammars))
+      (nvim-treesitter.withPlugins (plugins: with plugins; [
+        tree-sitter-nix
+        tree-sitter-lua
+        tree-sitter-rust
+        tree-sitter-python
+        # Add more languages as needed
+      ]))
     ];
-
     extraPackages = with pkgs; [
       gcc  # Required for compiling Treesitter parsers
+      rustToolchain
+      nodePackages.typescript-language-server
+      nodePackages.vscode-langservers-extracted  # Includes HTML, CSS, JSON LSPs
+      lua-language-server
+      pyright  # Python LSP
+      nil  # Nix LSP
     ];
   };
 
-  # Copy your Neovim config to the appropriate location
   home.file.".config/nvim" = {
     source = ./nvim;
     recursive = true;
   };
+
+  home.packages = with pkgs; [
+    rustfmt
+    clippy
+  ];
 }

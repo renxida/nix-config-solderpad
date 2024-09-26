@@ -86,4 +86,3 @@ autocmd('TextYankPost', {
     end,
 })
 
--- Add any additional Neovim configurations here
