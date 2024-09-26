@@ -1,11 +1,15 @@
 { config, pkgs, chatsh, ... }:
 
+let 
+  nvimConfig = import ./nvim.nix { inherit config pkgs; };
+in
 {
   nixpkgs = {
     config = {
       allowUnfree = true;
     };
   };
+  imports = [ nvimConfig ];
 
   programs = {
     home-manager.enable = true;
@@ -14,7 +18,7 @@
       userName = "Cedar";
       userEmail = "cedar.ren@gmail.com";
     };
-    neovim.enable = true;
+    neovim = nvimConfig.programs.neovim;
     firefox.enable = true;
     rofi = {
       enable = true;
@@ -47,7 +51,6 @@
   home.packages = with pkgs; [
     chatsh.packages.${pkgs.system}.default
     (import ./vscode.nix { inherit pkgs; })
-    firefox
     discord
     curl
     gh

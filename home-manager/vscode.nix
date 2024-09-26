@@ -7,6 +7,13 @@ pkgs.vscode-with-extensions.override {
     rust-lang.rust-analyzer
     github.copilot
   ] ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+    {
+      name = "copilot-chat";
+      publisher = "GitHub";
+      version = "0.21.2024092601";
+      sha256 = "0rqznhp06f80swvcp6q2g1br96ld03jd3a4fyz364sjjhnxv69fg";
+    }
+
     #{
     #  name = "remote-server";
     #  publisher = "ms-vscode";
