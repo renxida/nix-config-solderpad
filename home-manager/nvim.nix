@@ -15,13 +15,8 @@ in
     '';
     plugins = with pkgs.vimPlugins; [
       lazy-nvim
-      (nvim-treesitter.withPlugins (plugins: with plugins; [
-        tree-sitter-nix
-        tree-sitter-lua
-        tree-sitter-rust
-        tree-sitter-python
-        # Add more languages as needed
-      ]))
+      nvim-lspconfig
+      nvim-treesitter.withAllGrammars
     ];
     extraPackages = with pkgs; [
       gcc  # Required for compiling Treesitter parsers
@@ -34,13 +29,7 @@ in
     ];
   };
 
-  home.file.".config/nvim" = {
-    source = ./nvim;
-    recursive = true;
-  };
-
-  home.packages = with pkgs; [
-    rustfmt
-    clippy
-  ];
+  xdg.configFile."nvim/init.lua".source = ./nvim/init.lua;
+  xdg.configFile."nvim/lua/plugins.lua".source = ./nvim/lua/plugins.lua;
+  xdg.configFile."nvim/lua/plugin-config.lua".source = ./nvim/lua/plugin-config.lua;
 }

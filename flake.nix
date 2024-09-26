@@ -1,6 +1,5 @@
 {
   description = "NixOS configuration";
-
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     home-manager = {
@@ -11,14 +10,18 @@
       url = "github:renxida/chatsh/markdown";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
-
-  outputs = { self, nixpkgs, home-manager, chatsh, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, chatsh, rust-overlay, ... }@inputs:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs {
         inherit system;
         config.allowUnfree = true;
+        overlays = [ rust-overlay.overlays.default ];
       };
     in {
       homeConfigurations = {
@@ -27,7 +30,7 @@
           modules = [
             ./home-manager/home.nix
             {
-              home ={
+              home = {
                 username = "xidaren2";
                 homeDirectory = "/home/xidaren2";
               };
@@ -40,7 +43,7 @@
           modules = [
             ./home-manager/home.nix
             {
-              home ={
+              home = {
                 username = "cedar";
                 homeDirectory = "/home/cedar";
               };
@@ -69,6 +72,7 @@
               home-manager.extraSpecialArgs = { inherit chatsh; };
             }
           ];
+          specialArgs = { inherit pkgs; };
         };
       };
     };

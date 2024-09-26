@@ -41,28 +41,8 @@ vim.opt.rtp:prepend(lazypath)
 -- Initialize lazy.nvim
 require("lazy").setup("plugins")
 
--- Configure Treesitter
-require('nvim-treesitter.configs').setup {
-  ensure_installed = "all",
-  sync_install = false,
-  auto_install = true,
-  highlight = {
-    enable = true,
-    additional_vim_regex_highlighting = false,
-  },
-  indent = {
-    enable = true
-  },
-  incremental_selection = {
-    enable = true,
-    keymaps = {
-      init_selection = "gnn",
-      node_incremental = "grn",
-      scope_incremental = "grc",
-      node_decremental = "grm",
-    },
-  },
-}
+-- Load plugin configurations
+require("plugin-config")
 
 -- Key mappings
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
@@ -74,7 +54,6 @@ vim.opt.statusline = "%f - %y %=%l:%c"
 local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
 local yank_group = augroup('HighlightYank', {})
-
 autocmd('TextYankPost', {
     group = yank_group,
     pattern = '*',
@@ -85,4 +64,3 @@ autocmd('TextYankPost', {
         })
     end,
 })
-
