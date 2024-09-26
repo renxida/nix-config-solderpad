@@ -25,7 +25,7 @@ local lspconfig = require('lspconfig')
 lspconfig.rust_analyzer.setup{}
 
 -- TypeScript
-lspconfig.tsserver.setup{}
+lspconfig.ts_ls.setup{}
 
 -- Python
 lspconfig.pyright.setup{}
