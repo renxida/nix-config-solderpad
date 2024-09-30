@@ -51,6 +51,7 @@ in
   home.packages = with pkgs; [
     chatsh.packages.${pkgs.system}.default
     (import ./vscode.nix { inherit pkgs; })
+    asciinema
     maestral
     maestral-gui
     discord
