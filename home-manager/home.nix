@@ -51,6 +51,8 @@ in
   home.packages = with pkgs; [
     chatsh.packages.${pkgs.system}.default
     (import ./vscode.nix { inherit pkgs; })
+    maestral
+    maestral-gui
     discord
     curl
     gh
