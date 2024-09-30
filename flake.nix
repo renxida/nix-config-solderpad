@@ -19,7 +19,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
-  outputs = { self, nixpkgs, home-manager, chatsh, rust-overlay, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, chatsh, aider, rust-overlay, ... }@inputs:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs {
