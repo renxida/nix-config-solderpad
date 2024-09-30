@@ -9,16 +9,16 @@
         "poetry2nix": "poetry2nix"
       },
       "locked": {
-        "lastModified": 1727673279,
-        "narHash": "sha256-M7idrngFHR700Evl2BCCPViF86uoItKQw5LclIK7X0I=",
+        "lastModified": 1727676061,
+        "narHash": "sha256-Xxjk6v0wKnb1ghD529S8pZX3ZeyWmaV0bnJ6MAPO1HI=",
         "owner": "renxida",
         "repo": "chatsh",
-        "rev": "266376247d19dfe42cb77e9f540910b5bcd61879",
+        "rev": "87b39094c3b3a95c363b8b13f6e3d68cf061e7e4",
         "type": "github"
       },
       "original": {
         "owner": "renxida",
-        "ref": "markdown",
+        "ref": "master",
         "repo": "chatsh",
         "type": "github"
       }

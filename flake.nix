@@ -7,7 +7,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     chatsh = {
-      url = "github:renxida/chatsh/markdown";
+      url = "github:renxida/chatsh/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     rust-overlay = {
