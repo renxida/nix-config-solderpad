@@ -25,7 +25,10 @@
       pkgs = import nixpkgs {
         inherit system;
         config.allowUnfree = true;
-        overlays = [ rust-overlay.overlays.default ];
+        overlays = [ 
+          rust-overlay.overlays.default
+          (import ./overlays inputs)
+        ];
       };
     in {
       homeConfigurations = {
@@ -40,7 +43,6 @@
               };
             }
           ];
-          extraSpecialArgs = { inherit chatsh aider; };
         };
         cedar = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
@@ -53,7 +55,6 @@
               };
             }
           ];
-          extraSpecialArgs = { inherit chatsh aider; };
         };
       };
       nixosConfigurations = {
@@ -73,7 +74,6 @@
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.users.cedar = import ./home-manager/home.nix;
-              home-manager.extraSpecialArgs = { inherit chatsh aider; };
             }
           ];
           specialArgs = { inherit pkgs; };
