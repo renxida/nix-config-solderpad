@@ -1,4 +1,4 @@
-{ config, pkgs, chatsh, ... }:
+{ config, pkgs, chatsh, aider, ... }:
 
 let 
   nvimConfig = import ./nvim.nix { inherit config pkgs; };
@@ -50,6 +50,7 @@ in
 
   home.packages = with pkgs; [
     chatsh.packages.${pkgs.system}.default
+    aider.packages.${pkgs.system}.default
     (import ./vscode.nix { inherit pkgs; })
     asciinema
     maestral

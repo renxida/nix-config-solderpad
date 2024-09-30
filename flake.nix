@@ -10,6 +10,10 @@
       url = "github:renxida/chatsh/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    aider = {
+      url = "github:renxida/aider/nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     rust-overlay = {
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -36,7 +40,7 @@
               };
             }
           ];
-          extraSpecialArgs = { inherit chatsh; };
+          extraSpecialArgs = { inherit chatsh aider; };
         };
         cedar = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
@@ -49,7 +53,7 @@
               };
             }
           ];
-          extraSpecialArgs = { inherit chatsh; };
+          extraSpecialArgs = { inherit chatsh aider; };
         };
       };
       nixosConfigurations = {
@@ -69,7 +73,7 @@
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.users.cedar = import ./home-manager/home.nix;
-              home-manager.extraSpecialArgs = { inherit chatsh; };
+              home-manager.extraSpecialArgs = { inherit chatsh aider; };
             }
           ];
           specialArgs = { inherit pkgs; };
