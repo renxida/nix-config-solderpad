@@ -59,7 +59,6 @@ in
     curl
     gh
     azure-cli
-    docker
     kitty
     xclip
     clang
