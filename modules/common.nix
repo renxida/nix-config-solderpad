@@ -23,6 +23,7 @@
       wireplumber
       brightnessctl
       unzip
+      docker
     ];
     shellAliases = {
       pbcopy = "xclip -selection clipboard";
@@ -31,6 +32,14 @@
     variables = {
       CC = "clang";
       CXX = "clang++";
+    };
+  };
+
+  virtualization.docker = {
+    enable = true;
+    rootless = {
+      enable = true;
+      setSocketVariable = true;
     };
   };
 
