@@ -150,6 +150,7 @@ in
   home.sessionVariables = {
     CC = "clang";
     CXX = "clang++";
+    LD_LIBRARY_PATH = "${pkgs.stdenv.cc.cc.lib}/lib:$LD_LIBRARY_PATH";
   };
 
   home.stateVersion = "24.05";
