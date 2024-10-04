@@ -63,6 +63,8 @@ in
     kitty
     xclip
     clang
+    stdenv.cc.cc.lib  # Add this line to include libstdc++
+    lld
     llvmPackages.libcxx
     cmake
     gnumake
