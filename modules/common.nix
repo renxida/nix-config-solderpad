@@ -24,6 +24,7 @@
       brightnessctl
       unzip
       docker
+      lld
     ];
     shellAliases = {
       pbcopy = "xclip -selection clipboard";
