@@ -74,7 +74,7 @@ in
     (nerdfonts.override { fonts = [ "FiraCode" ]; })
     i3status-rust
     aria2
-    ag
+    silver-searcher
     ripgrep
   ];
 
