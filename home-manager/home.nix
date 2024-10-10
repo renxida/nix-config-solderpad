@@ -73,6 +73,9 @@ in
     i3
     (nerdfonts.override { fonts = [ "FiraCode" ]; })
     i3status-rust
+    aria2
+    silver-searcher
+    ripgrep
   ];
 
   xsession.windowManager.i3 = {
