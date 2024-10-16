@@ -29,7 +29,10 @@ in
     ];
   };
 
-  xdg.configFile."nvim/init.lua".source = ./nvim/init.lua;
-  xdg.configFile."nvim/lua/plugins.lua".source = ./nvim/lua/plugins.lua;
-  xdg.configFile."nvim/lua/plugin-config.lua".source = ./nvim/lua/plugin-config.lua;
+  
+  xdg.configFile."nvim" = {
+    source = ./nvim;
+    recursive = true;
+    onChange = "rm -rf $HOME/.config/nvim && cp -r ${./nvim} $HOME/.config/nvim";
+  };
 }
